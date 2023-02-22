@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a th:href="@{/}" class="nav-link px-2 text-white">Home</a></li>
+            </ul>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a th:href="@{/admin}" class="nav-link px-2 text-white">Admin page</a></li>
+            </ul>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a th:href="@{/finishWorking}" class="nav-link px-2 text-white">Finish working</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<h3>Add new product</h3>
+<div class="input-group mb-3">
+    <form th:action="@{/product/add}" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="enter name"><br>
+        <input th:type="number" name="price" min="1" max="2147483647" placeholder="enter prise"><br>
+        <input type="file" name="photo" placeholder="photo"><br><br>
+        <button th:type="submit" class="btn btn-success">Add product</button>
+    </form>
+</div>
+<h3>Add new worker</h3>
+<div class="input-group mb-3">
+    <form th:action="@{/worker/add}" method="post">
+        <input type="text" name="name" placeholder="enter worker"><br>
+        <button th:type="submit" class="btn btn-success">Add worker</button>
+    </form>
+</div>
+<h3>Remove product</h3>
+<div class="input-group mb-3">
+    <form th:action="@{/product/remove}" method="post">
+        <select class="selectpicker form-control form-group" name="productId">
+            <option th:each="el : ${products}" th:value="${el.getId()}" th:text="${el.getName()}"></option>
+        </select>
+        <button th:type="submit" class="btn btn-success">Remove product</button>
+    </form>
+</div>
+<h3>Remove worker</h3>
+<div class="input-group mb-3">
+    <form th:action="@{/worker/remove}" method="post">
+        <select class="selectpicker form-control form-group" name="workerId">
+            <option th:each="el : ${workers}" th:value="${el.getId()}" th:text="${el.getName()}"></option>
+        </select>
+        <button th:type="submit" class="btn btn-success">Remove worker</button>
+    </form>
+</div>
+</body>
+</html>

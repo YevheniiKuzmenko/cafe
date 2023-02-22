@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body>
+<h3>Finish working</h3>
+<h5>Select your name</h5>
+<div class="input-group mb-3">
+    <form th:action="@{/finishWorking}" method="post">
+        <select class="selectpicker form-control form-group" name="workerId">
+            <option th:each="el : ${workers}" th:value="${el.getId()}" th:text="${el.getName()}"></option>
+        </select>
+        <button th:type="submit" class="btn btn-success">Finish working</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cafe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a th:href="@{/admin}" class="nav-link px-2 text-white">Admin page</a></li>
+            </ul>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a th:href="@{/finishWorking}" class="nav-link px-2 text-white">Finish working</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="container-fluid">
+    <div class="row min-vh-100 flex-column  flex-md-row">
+        <navbar class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <span class="fs-4">Замовлення</span>
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <div th:each="el2 : ${orderCafes}">
+                        <tbody>
+                        <th th:text="${el2.getProduct().getName()}"></th>
+                        <td th:text="${el2.getProduct().getPrice()} + 'грн'"></td>
+                        <td>
+                            <a th:text="'X'" th:href="@{'/orderCafe/delete/'+${el2.id}}"
+                               class="link-dark text-white"></a>
+                        </td>
+                        </tbody>
+                    </div>
+                </table>
+                <div th:text="'До сплати '+${checkCost}+'грн'" class="fs-4"></div>
+                <div class="btn-group">
+                    <a th:href="@{'/payCash'}" class="btn btn-success">Готівка</a>
+                    <a th:href="@{'/payCard'}" class="btn btn-outline-success">Карта</a>
+                </div>
+            </ul>
+
+
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <strong>mdo</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="">
+                    <li><a class="dropdown-item" th:href="'/admin'">admin</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">yevhenii.kuzmenko@meta.ua</a></li>
+                </ul>
+            </div>
+
+
+        </navbar>
+        <div class="col">
+            <div class="row row-cols-1 row-cols-md-4 g-3">
+                <div th:each="el : ${products}" class="col">
+                    <div class="card text-center h-100">
+                        <a th:href="@{'/productInOrder/add/'+${el.id}}"
+                           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-dark">
+                            <ul class="list-group list-group-flush">
+                                <img th:src="@{'/img/' + ${el.photoName}}" class="card-img-top" alt="photo"/>
+                            </ul>
+                            <div class="card-body">
+                                <h4 th:text="${el.name}"/>
+                                <p th:text="'вартість '+${el.getPrice()} + 'грн'"/>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
+</body>
+</html>
