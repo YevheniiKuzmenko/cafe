@@ -31,6 +31,17 @@
         <button th:type="submit" class="btn btn-success">Add product</button>
     </form>
 </div>
+<div class="col">
+    <h3>Add new product</h3>
+    <div class="input-group mb-3">
+        <form th:action="@{/product/add}" method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="enter name" class="form-control"><br>
+            <input type="text" name="price" placeholder="enter price" class="form-control"><br>
+            <input type="file" name="photo"><br><br>
+            <button th:type="submit" class="btn btn-success">Add product</button>
+        </form>
+    </div>
+</div>
 <h3>Add new worker</h3>
 <div class="input-group mb-3">
     <form th:action="@{/worker/add}" method="post">
